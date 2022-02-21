@@ -126,3 +126,26 @@ But also some disadvantages:
   use-cases.
 
 [node2nix]: https://github.com/svanderburg/node2nix
+
+## Hacking
+
+Install dependencies:
+
+```sh
+yarn
+```
+
+Build TypeScript:
+
+```sh
+# Add `-w` to watch for changes.
+yarn tsc
+```
+
+Try your local build:
+
+```sh
+yarn yarn-nixpkgs prettier ./out
+nix-build ./out
+./result/bin/prettier --help
+```
