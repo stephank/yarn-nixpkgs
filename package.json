@@ -2,7 +2,7 @@
   "name": "yarn-nixpkgs",
   "version": "0.0.2",
   "license": "BSD-2-Clause",
-  "packageManager": "yarn@3.1.1",
+  "packageManager": "yarn@3.2.0",
   "files": [
     "./dist"
   ],
@@ -11,21 +11,21 @@
     "prepack": "tsc"
   },
   "dependencies": {
-    "@yarnpkg/cli": "^3.1.1",
-    "@yarnpkg/core": "^3.1.0",
-    "@yarnpkg/fslib": "^2.6.0",
-    "@yarnpkg/libzip": "^2.2.2",
-    "@yarnpkg/plugin-npm": "^2.6.0",
-    "@yarnpkg/plugin-pack": "^3.1.0",
-    "@yarnpkg/plugin-pnp": "^3.1.0",
-    "@yarnpkg/pnp": "^3.1.0",
+    "@yarnpkg/cli": "^3.2.0",
+    "@yarnpkg/core": "^3.2.0",
+    "@yarnpkg/fslib": "^2.6.1",
+    "@yarnpkg/libzip": "^2.2.4",
+    "@yarnpkg/plugin-npm": "^2.7.0",
+    "@yarnpkg/plugin-pack": "^3.1.1",
+    "@yarnpkg/plugin-pnp": "^3.2.0",
+    "@yarnpkg/pnp": "^3.2.0",
     "clipanion": "^3.1.0",
-    "semver": "^7.1.2"
+    "semver": "^7.3.5"
   },
   "devDependencies": {
     "@types/node": "*",
     "@types/semver": "^7.1.0",
-    "prettier": "2.3.2",
-    "typescript": "4.5.5"
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
   }
 }

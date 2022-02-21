@@ -4,24 +4,22 @@ import NpmPlugin from "@yarnpkg/plugin-npm";
 import PnpPlugin from "@yarnpkg/plugin-pnp";
 import { Cli, Command, Option } from "clipanion";
 import { Filename, PortablePath, VirtualFS, ppath, xfs } from "@yarnpkg/fslib";
-import { SerializedState } from "@yarnpkg/pnp";
+import { SerializedState, generatePrettyJson } from "@yarnpkg/pnp";
 import {
   Cache,
   Configuration,
   InstallMode,
+  MultiFetcher,
   Project,
   StreamReport,
-  structUtils,
   VirtualFetcher,
+  WorkspaceFetcher,
+  structUtils,
 } from "@yarnpkg/core";
 
-// @todo: Deep imports don't sound kosher, discuss with upstream.
-import { MultiFetcher } from "@yarnpkg/core/lib/MultiFetcher";
-import { WorkspaceFetcher } from "@yarnpkg/core/lib/WorkspaceFetcher";
-
-import { NpmSemverFetcher } from "./fetchers/NpmSemverFetcher";
-import generateSharedLoader from "./generateSharedLoader";
 import generateNixExpr from "./generateNixExpr";
+import generateSharedLoader from "./generateSharedLoader";
+import { NpmSemverFetcher } from "./fetchers/NpmSemverFetcher";
 import { initGlobalEnv } from "./globalEnv";
 
 class PrepareCommand extends Command {
@@ -71,7 +69,6 @@ class PrepareCommand extends Command {
       { overwrite: true }
     );
     // Override fetchers with our Nix-compatible variants
-    // @todo: Monkey patch. Discuss with upstream if there's a better way.
     configuration.makeFetcher = () =>
       new MultiFetcher([
         new VirtualFetcher(),
@@ -171,8 +168,7 @@ class PrepareCommand extends Command {
     );
     await xfs.writeFilePromise(
       ppath.join(output, "pnp.data.json" as Filename),
-      // @todo: Use generatePrettyJson, but not exported by @yarnpkg/pnp
-      JSON.stringify(pnpData, null, 2)
+      generatePrettyJson(pnpData)
     );
     await xfs.writeFilePromise(
       ppath.join(output, "package.nix" as Filename),
